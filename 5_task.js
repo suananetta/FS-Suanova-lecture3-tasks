@@ -54,11 +54,11 @@ async function getPageInformation() {
     const pageInfo = {};
 
     try {
-        await request(URLS.navigation, (nav) => {nav? pageInfo.navigation = nav : ''});
-        await request(URLS.user, (user) => user? pageInfo.user = user : '');
-        await request(URLS.cart, (cart) => cart? pageInfo.user.cart = cart : '');
-        await request(URLS.checkAvailableCart, (available) => available? pageInfo.user.cart = pageInfo.user.cart.filter(({id}) => available.includes(id)) : '');
-        await request(URLS.favoriteGoods, (favGoods) => favGoods? pageInfo.user.favGoods = favGoods : '');
+        let navigation = await request(URLS.navigation, (nav) => {nav? pageInfo.navigation = nav : ''});
+        let user = await request(URLS.user, (user) => user? pageInfo.user = user : '');
+        let userCart = await request(URLS.cart, (cart) => cart? pageInfo.user.cart = cart : '');
+        let checkAvailableCart = await request(URLS.checkAvailableCart, (available) => available? pageInfo.user.cart = pageInfo.user.cart.filter(({id}) => available.includes(id)) : '');
+        let userFavoriteGoods = await request(URLS.favoriteGoods, (favGoods) => favGoods? pageInfo.user.favGoods = favGoods : '');
     } catch (error) {
         console.log(error);
     }
