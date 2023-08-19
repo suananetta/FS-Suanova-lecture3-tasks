@@ -93,22 +93,16 @@ function all(promises) {
   let counter = 0;
   let promise = new Promise((resolve, reject) => {
         promises.forEach((item, index) => {
-            if(item == 'error') {
-                return 
-            } else {
-                item.then((res) => {
-                    results[index] = res;
-                    counter++;
-                    if(counter === promises.length) {
-                        resolve(console.log(results));
-                    }
-                  
-                })
-                .catch((error) => {
-                    reject(console.log(error));
-                })
-            }
-            
+            item.then((res) => {
+                results[index] = res;
+                counter++;
+                if(counter === promises.length) {
+                    resolve(console.log(results));
+                }
+            })
+            .catch((error) => {
+                reject(console.log(error));
+            })
         });
     })
 }
